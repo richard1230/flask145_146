@@ -1,0 +1,68 @@
+"""
+(my_env) $pwd
+/Users/mac/PycharmProjects/bbc
+(my_env) $python3 manage.py db migrate
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.autogenerate.compare] Detected added table 'cms_role'
+INFO  [alembic.autogenerate.compare] Detected added table 'cms_role_user'
+  Generating /Users/mac/PycharmProjects/bbc/migrations/versions/725375213f6e_.py
+  ...  done
+(my_env) $python3 manage.py db upgrade
+INFO  [alembic.runtime.migration] Context impl MySQLImpl.
+INFO  [alembic.runtime.migration] Will assume non-transactional DDL.
+INFO  [alembic.runtime.migration] Running upgrade 08504da615b9 -> 725375213f6e, empty message
+(my_env) $
+------------------------------------------------------------------------------
+mysql> show databases;
++-----------------------+
+| Database              |
++-----------------------+
+| information_schema    |
+| alembic_demo          |
+| flask_alembic_demo    |
+| flask_migrate_demo    |
+| flask_restful_demo    |
+| flask_script_demo     |
+| flask_sqlalchemy_demo |
+| icbc_demo             |
+| mysql                 |
+| performance_schema    |
+| sys                   |
+| zlbbs                 |
++-----------------------+
+12 rows in set (0.01 sec)
+
+mysql> use zlbbs;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+mysql> show tables;
++-----------------+
+| Tables_in_zlbbs |
++-----------------+
+| alembic_version |
+| cms_role        |
+| cms_role_user   |
+| cms_user        |
++-----------------+
+4 rows in set (0.00 sec
+------------------------------------------------------------------------------
+
+(my_env) $python3 manage.py create_role
+(my_env) $
+
+------------------=========================
+
+mysql> select * from cms_role
+    -> ;
++----+-----------+---------------------------------------------------+---------------------+-------------+
+| id | name      | desc                                              | create_time         | permissions |
++----+-----------+---------------------------------------------------+---------------------+-------------+
+|  1 | 访问者    | 只能相关数据，不能修改。                          | 2019-12-23 13:03:42 |           1 |
+|  2 | 运营      | 管理帖子，管理评论,管理前台用户。                 | 2019-12-23 13:03:42 |          55 |
+|  3 | 管理员    | 拥有本系统所有权限。                              | 2019-12-23 13:03:42 |          63 |
+|  4 | 开发者    | 开发人员专用角色。                                | 2019-12-23 13:03:42 |         255 |
++----+-----------+---------------------------------------------------+---------------------+-------------+
+4 rows in set (0.00 sec)
+"""
